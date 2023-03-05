@@ -1,0 +1,66 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-intermediate-lambda-reader.ss" "lang")((modname 2020w1-mt2-p6-starter) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #t)))
+(require spd/tags)
+(require 2htdp/image)
+
+(@assignment mt2-p6)
+
+(@cwl ???)   ;fill in your CWL here (same CWL you put for 110 problem sets)
+
+(@problem 1) ;THIS IS REALLY PROBLEM 6.  DO NOT EDIT OR DELETE THIS LINE!
+
+;;
+;; Design a function called tree that consumes a positive number and
+;; produces a fractal image like the ones shown in the exam supplement
+;;     http://cs110.students.cs.ubc.ca/exams/trees.pdf
+;;
+;; To save writing we are giving you a simple function called tr that consumes
+;; a number and produces a black solid rectangle of width 1 and that height.
+;; This will save you having to write "rectangle", "solid", and COLOR multiple
+;; times.
+;;
+;; You must include all relevant design recipe elements, including a three part
+;; termination argument.
+;;
+
+;; As always, a file that does not run will lose a significant number of marks.
+;; Run your work often, so that you can check and fix errors as soon as they
+;; creep in.  Also be sure to run every time before you submit.
+
+(define COLOR "white")
+(define SCALE 0.6)	; Each branch is this factor of the size of the trunk
+(define CUTOFF 10)	; Minimum size for branching
+
+(@htdf tree)
+(@signature Number -> Image)
+;; produces a tree fractal of size n
+(check-expect (tree 10) (tr 10))
+(check-expect (tree 5) (tr 5))
+(check-expect (tree 16) (above (beside (rotate  45 (tr (* 16 SCALE)))
+                                       (rotate -45 (tr (* 16 SCALE))))
+                               (tr (* 16 SCALE))))
+
+;(define (tree n) empty-image)
+
+(@template genrec)
+
+(define (tree n)
+  (cond [(<= n CUTOFF) (tr n)]
+        [else
+         (above (beside (rotate  45 (tree (* n SCALE)))
+                        (rotate -45 (tree (* n SCALE))))
+                (tr (* n SCALE)))]))
+
+
+(@htdf tr)
+(@signature Number -> Image)
+;; produce solid COLOR rectangle of given height and width 1
+
+(check-expect (tr 10) (rectangle 1 10 "solid" COLOR))
+(check-expect (tr 20) (rectangle 1 20 "solid" COLOR))
+
+(@template Number)
+
+(define (tr h)
+  (rectangle 1 h "solid" COLOR))
