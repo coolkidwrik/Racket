@@ -1,0 +1,65 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname m02-grade-standing-work) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #t)))
+(require spd/tags)
+
+(@assignment lectures/m02-grade-standing)
+
+(@cwl wriksen)
+
+(@problem 1)
+
+(@htdd GradeStanding)
+;;GradeStanding is one of:
+;; - Natural
+;; - "H"
+;; - "P"
+;; - "F"
+;; - "T"
+;; interp. if number percent grade, or standing
+;; CONSTRAINT: if natural must be in [0, 100]
+(define GS1 100)
+(define GS2 49)
+(define GS1 "P")
+
+(@dd-template-rules one of
+                    atomic-non-distinct
+                    atomic-distinct
+                    atomic-distinct
+                    atomic-distinct
+                    atomic-distinct)   ;Natural
+
+(define (fn-for-grade-standing gs)
+  (cond [(number? gs) (... gs)]
+        [(String=? "H") (...)]
+        [(String=? "P") (...)]
+        [(String=? "T") (...)]
+        [else (...)]))
+
+(@htdf excellent?)
+(@signature GradeStanding -> Boolean)
+;;produces true if GradeStanding >= 90
+(check-expect (excellent? 89) #f)
+(check-expect (excellent? 90) #t)
+(check-expect (excellent? 91) #t)
+(check-expect (excellent? "H") #f)
+(check-expect (excellent? "P") #f)
+(check-expect (excellent? "T") #f)
+(check-expect (excellent? "F") #f)
+
+
+(define (excellent?) false)
+
+
+
+
+
+
+#|
+INFORMATION   Data
+  95 85       95 85   integers [0, 100]
+
+F             "F"
+H             "H"
+
+|#
