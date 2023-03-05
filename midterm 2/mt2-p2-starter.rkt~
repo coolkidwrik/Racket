@@ -1,0 +1,84 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-intermediate-reader.ss" "lang")((modname mt2-p2-starter) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #t)))
+(require spd/tags)
+
+(@assignment exams/2021w1-mt2/mt2-p2)
+
+(@cwl ???)   ;fill in your CWL here (same CWL you put for 110 problem sets)
+
+(@problem 1) ;THIS IS REALLY PROBLEM 2.  DO NOT EDIT OR DELETE THIS LINE!
+
+;;
+;; This problem is about grading a student's multiple choice reponses from a
+;; test. It is a 2 one of problem involving the following types:
+;;
+
+
+(@htdd ListOfStudentAnswer)
+;; ListOfStudentAnswer is one of:
+;;  - empty
+;;  - (cons String ListOfStudentAnswer)
+;; interp. list of all a student's answers on a test
+;;  "A" "B" "C"... are multiple choice answers
+;;  "blank"        student left that answer blank
+(define LOSA1 empty)
+(define LOSA2 (list "A" "blank"))
+
+(@htdd ListOfCorrectAnswer)
+;; ListOfCorrectAnswer is one of:
+;;  - empty
+;;  - (cons String ListOfCorrectAnswer)
+;; interp. answer key (list of correct answers) for a test
+;;  "A" "B" "C"... the correct answer to a multiple choice question
+(define LOCA1 empty)
+(define LOCA2 (list "A" "B"))
+;;
+;; Design a function called grade that consumes ListOfStudentAnswer and 
+;; ListOfCorrectAnswer and produces a final grade based on this rubric:
+;;
+;;    correct answers are worth 1 pt
+;;    incorrect answers are worth -1 pt
+;;    blank answers are worth 0 pts
+;;
+;; NOTE: the list of student answers and the list of correct answers may not be 
+;; the same length because a student might not complete the test (so will
+;; provide too few answers) OR the student might provide more answers than 
+;; there are questions (e.g., when they misalign their responses on the
+;; card on which they record their responses.)
+;; 
+;;  - student answers that come after the last question must be ignored
+;;  - student answers that are missing are interpreted as blanks
+;; 
+;; examples where lists are the same length:
+;;
+;; (grade (list "A" "D" "C") (list "A" "B" "C")) -> 1
+;;     because the first and third question are correctly answered, the second
+;;     one is incorrect
+;;
+;; (grade (list "C" "blank" "A" "B") (list "C" "B" "A" "B")) -> 3
+;;     the second question was left blank, but all the rest are correct
+;;
+;; (grade (list "D" "D" "blank") (list "B" "A" "C")) -> -2
+;;     the first two are wrong, and the last was left blank
+;;
+;; examples where lists are different lengths:
+;;
+;; (grade (list "D" "D") (list "B" "D" "C")) -> 0
+;;     the second answer is correct, and the third answer is missing
+;;
+;; (grade (list "A" "blank" "D") (list "A" "D")) -> 1
+;;     the first answer is correct, second one is not, the third is ignored
+;;
+;; NOTE:
+;;  - you must design this as a 2 one of problem
+;;  - you must include a 2 one of table
+;;  - you must number your table cells and the corresponding
+;;    cond question/answer pairs
+;;  - you may abbreviate ListOfStudentAnswer to LOSA and
+;;    ListOfCorrectAnswer to LOCA 
+;;  - for full credit you must use the table to simplify the
+;;    final function definition
+;;
+
+(@htdf grade)
